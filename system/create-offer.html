@@ -33,23 +33,22 @@
         </div>
         <div class="col-md-6">
           <label class="form-label">قالب اجور العمل</label>
-          <select class="form-select">
+          <select class="form-select" id="wagesTemplateSelect">
             <option value=""></option>
             <option value="ramadan">اجور العمل لرمضان</option>
             <option value="ramadan-daily">اجور عمل رمضان يوميه</option>
             <option value="template">قالب اجور العمل</option>
-            <option>+  انشاء جديد قالب اجور العمل</option>
-            
+            <option value="create-new-wages-template">+  انشاء جديد قالب اجور العمل</option>  
             <option>🔍البحث المتقدم </option>
           </select>
         </div>
         <div class="col-md-6">
-          <label class="form-label">قالب التنقلات والمبيت</label>
-          <select class="form-select">
+          <label class="form-label"> قالب التنقلات والمبيت</label>
+          <select class="form-select" id="transportTemplateSelect">
             <option value=""></option>
             <option value="ramadan">  قالب1</option>
             <option value="ramadan-daily">   قالب2</option>
-            <option>+  انشاء جديد قالب اجور العمل</option>
+            <option value="create-new-template">+  انشاء جديد قالب التنقلات والمبيت</option>
             <option>🔍البحث المتقدم </option>
           </select>
         </div>
@@ -115,7 +114,7 @@
         });
       }
       </script>
-      <!-- جدول التنقلات والسبت -->
+      <!-- جدول التنقلات والمبيت -->
       <div class="section-title">التنقلات والمبيت</div>
       <div class="table-responsive mb-3">
         <table class="table table-bordered align-middle text-center offer-table">
@@ -226,5 +225,334 @@
   </div>
   <!-- إضافة سكريبت Choices.js -->
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Modal لإنشاء قالب جديد -->
+  <div class="modal fade" id="createTemplateModal" tabindex="-1" role="dialog" aria-labelledby="createTemplateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createTemplateModalLabel">إنشاء قالب تنقلات ومبيت جديد</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="templateName" class="form-label">اسم القالب</label>
+              <input type="text" class="form-control" id="templateName" placeholder="أدخل اسم القالب">
+            </div>
+            <div class="col-md-6">
+              <label for="templateDescription" class="form-label">وصف القالب</label>
+              <input type="text" class="form-control" id="templateDescription" placeholder="أدخل وصف القالب">
+            </div>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th style="width: 40px">#</th>
+                  <th>المحافظة</th>
+                  <th>رسوم التنقل</th>
+                  <th>أجر المبيت</th>
+                  <th>أجر النثريات</th>
+                  <th style="width: 50px">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="addTableRow()">
+                      <i class="bi bi-plus"></i>
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="templateTableBody">
+                <tr>
+                  <td>1</td>
+                  <td>
+                    <select class="form-select form-select-sm">
+                      <option value="">اختر المحافظة</option>
+                      <option value="riyadh">صنعاء</option>
+                      <option value="jeddah">تعز</option>
+                      <option value="dammam">عدن</option>
+                      <option value="makkah"> عمران</option>
+                      <option value="medina">اب </option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeTableRow(this)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+          <button type="button" class="btn btn-primary">حفظ القالب</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal لإنشاء قالب أجور العمل -->
+  <div class="modal fade" id="createWagesTemplateModal" tabindex="-1" role="dialog" aria-labelledby="createWagesTemplateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createWagesTemplateModalLabel">إنشاء قالب أجور عمل جديد</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="wagesTemplateName" class="form-label">اسم القالب</label>
+              <input type="text" class="form-control" id="wagesTemplateName" placeholder="أدخل اسم القالب">
+            </div>
+            <div class="col-md-6">
+              <label for="wagesTemplateDescription" class="form-label"> work wages type</label>
+              <input type="text" class="form-control" id="wagesTemplateDescription" placeholder="">
+            </div>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th style="width: 40px">#</th>
+                  <th> النوع</th>
+                  <th> السعر</th>
+                  <th>معيار النوع</th>
+                  <th> تاريخ التسليم</th>
+                  <th style="width: 50px">
+                    
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="addWagesTableRow()">
+                      <i class="bi bi-plus"></i>
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="wagesTemplateTableBody">
+                <tr>
+                  <td>1</td>
+                  <td>
+                    <select class="form-select form-select-sm">
+                      <option value="">اختر النوع </option>
+                      <option value="construction">ارض</option>
+                      <option value="electrical">ارض مع رهق</option>
+                      <option value="plumbing">رهق</option>
+                      <option value="painting">مبنى</option>
+                      <option value="carpentry">غير ذلك</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+                  </td>
+                  <td>
+                    <select class="form-select form-select-sm">
+                      <option value="">اختر معيار النوع</option>
+                      <option value="daily">النوع1</option>
+                      <option value="piece">النوع2</option>
+                      <option value="area"> غير ذلك</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="date" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeWagesTableRow(this)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+          <button type="button" class="btn btn-primary">حفظ القالب</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // دالة فتح modal إنشاء قالب جديد
+    function openCreateTemplateModal() {
+      // فتح modal
+      var modal = new bootstrap.Modal(document.getElementById('createTemplateModal'));
+      modal.show();
+    }
+
+    // دالة فتح modal إنشاء قالب أجور العمل
+    function openCreateWagesTemplateModal() {
+      // فتح modal
+      var modal = new bootstrap.Modal(document.getElementById('createWagesTemplateModal'));
+      modal.show();
+    }
+
+    // دالة إضافة صف جديد للجدول
+    function addTableRow() {
+      const tbody = document.getElementById('templateTableBody');
+      const rowCount = tbody.rows.length + 1;
+      
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${rowCount}</td>
+        <td>
+          <select class="form-select form-select-sm">
+            <option value="">اختر المحافظة</option>
+            <option value="riyadh">صنعاء</option>
+            <option value="jeddah">تعز</option>
+            <option value="dammam">عدن</option>
+            <option value="makkah"> عمران</option>
+            <option value="medina">اب </option>
+          </select>
+        </td>
+        <td>
+          <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+        </td>
+        <td>
+          <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+        </td>
+        <td>
+          <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeTableRow(this)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      `;
+      
+      tbody.appendChild(newRow);
+    }
+
+    // دالة إضافة صف جديد لجدول أجور العمل
+    function addWagesTableRow() {
+      const tbody = document.getElementById('wagesTemplateTableBody');
+      const rowCount = tbody.rows.length + 1;
+      
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${rowCount}</td>
+        <td>
+          <select class="form-select form-select-sm">
+            <option value="">اختر النوع </option>
+            <option value="construction">ارض</option>
+            <option value="electrical">ارض مع رهق</option>
+            <option value="plumbing">رهق</option>
+            <option value="painting">مبنى</option>
+            <option value="carpentry">غير ذلك</option>
+          </select>
+        </td>
+        <td>
+          <input type="number" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+        </td>
+        <td>
+          <select class="form-select form-select-sm">
+            <option value="">اختر معيار النوع</option>
+            <option value="daily">النوع1</option>
+            <option value="piece">النوع2</option>
+            <option value="area"> غير ذلك</option>
+          </select>
+        </td>
+        <td>
+          <input type="date" class="form-control form-control-sm" placeholder="0.00" step="0.01">
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeWagesTableRow(this)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      `;
+      
+      tbody.appendChild(newRow);
+    }
+
+    // دالة حذف صف من الجدول
+    function removeTableRow(button) {
+      const row = button.closest('tr');
+      row.remove();
+      
+      // إعادة ترقيم الصفوف
+      const tbody = document.getElementById('templateTableBody');
+      const rows = tbody.getElementsByTagName('tr');
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].cells[0].textContent = i + 1;
+      }
+    }
+
+    // دالة حذف صف من جدول أجور العمل
+    function removeWagesTableRow(button) {
+      const row = button.closest('tr');
+      row.remove();
+      
+      // إعادة ترقيم الصفوف
+      const tbody = document.getElementById('wagesTemplateTableBody');
+      const rows = tbody.getElementsByTagName('tr');
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].cells[0].textContent = i + 1;
+      }
+    }
+
+    // دالة تعديل صف في جدول أجور العمل
+    function editWagesTableRow(button) {
+      const row = button.closest('tr');
+      const cells = row.cells;
+      
+      // يمكنك هنا إضافة منطق التعديل
+      // مثلاً: فتح modal للتعديل أو تفعيل الحقول للتحرير
+      console.log('تعديل الصف رقم:', cells[0].textContent);
+      
+      // مثال: تفعيل الحقول للتحرير
+      const inputs = row.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.disabled = false;
+        input.style.backgroundColor = '#fff';
+      });
+      
+      // تغيير لون الصف للإشارة إلى أنه في وضع التعديل
+      row.style.backgroundColor = '#f8f9fa';
+    }
+
+    // إضافة event listener للقوائم المنسدلة
+    document.addEventListener('DOMContentLoaded', function() {
+      // قالب التنقلات والمبيت
+      var transportSelect = document.getElementById('transportTemplateSelect');
+      if (transportSelect) {
+        transportSelect.addEventListener('change', function() {
+          if (this.value === 'create-new-template') {
+            openCreateTemplateModal();
+            // إعادة تعيين القائمة المنسدلة إلى القيمة الافتراضية
+            this.value = '';
+          }
+        });
+      }
+
+      // قالب أجور العمل
+      var wagesSelect = document.getElementById('wagesTemplateSelect');
+      if (wagesSelect) {
+        wagesSelect.addEventListener('change', function() {
+          if (this.value === 'create-new-wages-template') {
+            openCreateWagesTemplateModal();
+            // إعادة تعيين القائمة المنسدلة إلى القيمة الافتراضية
+            this.value = '';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html> 
