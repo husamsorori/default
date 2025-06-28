@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج تقديم الطلب</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Tajawal', Arial, sans-serif;
+        }
+        .main-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .form-select, .form-control {
+            border-radius: 8px;
+        }
+        .custom-dropdown {
+            position: relative;
+        }
+        .custom-dropdown-list {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin-top: 2px;
+        }
+        .custom-dropdown-list.show {
+            display: block;
+        }
+        .custom-dropdown-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .custom-dropdown-item:hover {
+            background: #f1f3f4;
+        }
+        .custom-dropdown-footer {
+            border-top: 1px solid #eee;
+            padding: 8px 16px;
+            background: #fafbfc;
+        }
+        .custom-dropdown-footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .custom-dropdown-footer a:hover {
+            text-decoration: underline;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+        }
+        .card-table {
+            background: #f7f7f7;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .add-row-btn {
+            color: #007bff;
+            background: none;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .accordion-button {
+            font-weight: 500;
+        }
+        @media (max-width: 767px) {
+            .main-card { padding: 12px 2px; }
+        }
+        /* تخصيص ألوان المودال */
+        #adoulModal .form-label, #adoulModal .form-control {
+            font-family: 'Tajawal', Arial, sans-serif;
+        }
+        #adoulModal .form-label {
+            color: #212529;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        #adoulModal .form-control {
+            color: #212529;
+            font-weight: 500;
+            font-size: 1rem;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-card">
+        <form>
+            <!-- الجزء الأول: الحقول على عمودين -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">نوع الطلب</label>
+                    <select class="form-select">
+                        <option>-- اختر --</option>
+                        <option>طلب جديد</option>
+                        <option>تعديل</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">رقم التقديم</label>
+                    <input type="text" class="form-control" value="9990020503" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">الرقم المزيد لموضوع الكلي/الشامل</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">رقم التكليف  </label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label"> وكلاء أوقاف في القرى</label>
+                    <div class="custom-dropdown">
+                        <input type="text" class="form-control" id="dropdownInput" readonly value="عادل محمد صالح عايش-77088864">
+                        <div class="custom-dropdown-list" id="dropdownList">
+                            <div class="custom-dropdown-item">عادل محمد صالح عايش-77088864</div>
+                            <div class="custom-dropdown-footer">
+                                <a href="#" id="addNew">+ إنشاء عدل الروية جديد</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">عدول التروية</label>
+                    <div class="custom-dropdown">
+                        <input type="text" class="form-control" id="dropdownInputAdoul" readonly value="">
+                        <div class="custom-dropdown-list" id="dropdownListAdoul">
+                            <div class="custom-dropdown-item"> وكلاء أوقاف في القرى = عادل محمد صالح عايش-77088864  </div>
+                           
+                            <div class="custom-dropdown-footer">
+                                <a href="#" id="addNewAdoul">+ إنشاء عدل تروية جديد</a>
+                            </div>
+                            <div class="custom-dropdown-footer">
+                                <a href="#" id="addNewAdoul"> 🔍البحث المتقدم  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الجزء الثاني: الوضع القائم -->
+            <div class="section-title">الوضع القائم للموضع الكلي/الشامل</div>
+            <div class="card-table mb-4">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>الفئة</th>
+                            <th>تصنيف الفئة</th>
+                            <th>ملاحظات</th>
+                            <th>المساحة</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" class="text-muted">لا توجد بيانات</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="add-row-btn mt-2">+ أضف سطر</button>
+            </div>
+
+            <!-- الجزء الثالث والرابع: الحد الشمالي والجنوبي -->
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            بيانات الحد الشمالي كما في الواقع
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <!-- الحقول الثلاثة للحد الشمالي -->
+                                    <div class="mb-3">
+                                        <label class="form-label">الحد الشمالي</label>
+                                        <input type="text" class="form-control" placeholder="الحد الشمالي">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">نوع الفاصل للحد الشمالي</label>
+                                        <div class="dropdown">
+                                            <input type="text" class="form-control" id="northBoundaryType" readonly placeholder="اختر نوع الفاصل" style="cursor:pointer; background:#fff;" data-bs-toggle="dropdown">
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" data-value="لا يوجد">1- لايوجد</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="عريم">2- عريم</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="سور">3- سور</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="الل">4- الل</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="جدار">5- جدار</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="اخرى تذكر">6- اخرى تذكر</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">جار الحد الشمالي</label>
+                                        <input type="text" class="form-control" placeholder="جار الحد الشمالي">
+                                    </div>
+                                    
+                                    <!-- الحقل الرابع للحد الشمالي - يظهر عند اختيار "لا يوجد" -->
+                                    <div id="fourthFieldNorth" class="mb-3" style="display: none;">
+                                        <label class="form-label">نهاية الحد</label>
+                                        <input type="text" class="form-control" placeholder="نهاية الحد">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- الجدول للحد الشمالي -->
+                                    <div class="card-table mb-4">
+                                        <label class="form-label">وصف الحد الشمالي كما في الواقع ومحضر النزول</label>
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>الفئة</th>
+                                                    <th>تصنيف الفئة</th>
+                                                    <th>المساحة</th>
+                                                    <th>ملاحظات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" class="text-muted">لا توجد بيانات</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="add-row-btn mt-2">+ أضف سطر</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            بيانات الحد الجنوبي كما في الواقع
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <!-- الحقول الثلاثة للحد الجنوبي -->
+                                    <div class="mb-3">
+                                        <label class="form-label">الحد الجنوبي</label>
+                                        <input type="text" class="form-control" placeholder="الحد الجنوبي">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">نوع الفاصل للحد الجنوبي</label>
+                                        <div class="dropdown">
+                                            <input type="text" class="form-control" id="southBoundaryType" readonly placeholder="اختر نوع الفاصل" style="cursor:pointer; background:#fff;" data-bs-toggle="dropdown">
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" data-value="لا يوجد">1- لايوجد</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="عريم">2- عريم</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="سور">3- سور</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="الل">4- الل</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="جدار">5- جدار</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="اخرى تذكر">6- اخرى تذكر</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">جار الحد الجنوبي</label>
+                                        <input type="text" class="form-control" placeholder="جار الحد الجنوبي">
+                                    </div>
+                                    
+                                    <!-- الحقل الرابع للحد الجنوبي - يظهر عند اختيار "لا يوجد" -->
+                                    <div id="fourthFieldSouth" class="mb-3" style="display: none;">
+                                        <label class="form-label">نهاية الحد</label>
+                                        <input type="text" class="form-control" placeholder="نهاية الحد">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- الجدول للحد الجنوبي -->
+                                    <div class="card-table mb-4">
+                                        <label class="form-label">وصف الحد الجنوبي كما في الواقع ومحضر النزول</label>
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>الفئة</th>
+                                                    <th>تصنيف الفئة</th>
+                                                    <th>المساحة</th>
+                                                    <th>ملاحظات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" class="text-muted">لا توجد بيانات</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="add-row-btn mt-2">+ أضف سطر</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            بيانات الحد الشرقي كما في الواقع
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <!-- الحقول الثلاثة للحد الشرقي -->
+                                    <div class="mb-3">
+                                        <label class="form-label">الحد الشرقي</label>
+                                        <input type="text" class="form-control" placeholder="الحد الشرقي">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">نوع الفاصل للحد الشرقي</label>
+                                        <div class="dropdown">
+                                            <input type="text" class="form-control" id="eastBoundaryType" readonly placeholder="اختر نوع الفاصل" style="cursor:pointer; background:#fff;" data-bs-toggle="dropdown">
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" data-value="لا يوجد">1- لايوجد</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="عريم">2- عريم</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="سور">3- سور</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="الل">4- الل</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="جدار">5- جدار</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="اخرى تذكر">6- اخرى تذكر</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">جار الحد الشرقي</label>
+                                        <input type="text" class="form-control" placeholder="جار الحد الشرقي">
+                                    </div>
+                                    
+                                    <!-- الحقل الرابع للحد الشرقي - يظهر عند اختيار "لا يوجد" -->
+                                    <div id="fourthFieldEast" class="mb-3" style="display: none;">
+                                        <label class="form-label">نهاية الحد</label>
+                                        <input type="text" class="form-control" placeholder="نهاية الحد">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- الجدول للحد الشرقي -->
+                                    <div class="card-table mb-4">
+                                        <label class="form-label">وصف الحد الشرقي كما في الواقع ومحضر النزول</label>
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>الفئة</th>
+                                                    <th>تصنيف الفئة</th>
+                                                    <th>المساحة</th>
+                                                    <th>ملاحظات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" class="text-muted">لا توجد بيانات</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="add-row-btn mt-2">+ أضف سطر</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            بيانات الحد الغربي كما في الواقع
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <!-- الحقول الثلاثة للحد الغربي -->
+                                    <div class="mb-3">
+                                        <label class="form-label">الحد الغربي</label>
+                                        <input type="text" class="form-control" placeholder="الحد الغربي">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">نوع الفاصل للحد الغربي</label>
+                                        <div class="dropdown">
+                                            <input type="text" class="form-control" id="westBoundaryType" readonly placeholder="اختر نوع الفاصل" style="cursor:pointer; background:#fff;" data-bs-toggle="dropdown">
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" data-value="لا يوجد">1- لايوجد</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="عريم">2- عريم</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="سور">3- سور</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="الل">4- الل</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="جدار">5- جدار</a></li>
+                                                <li><a class="dropdown-item" href="#" data-value="اخرى تذكر">6- اخرى تذكر</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">جار الحد الغربي</label>
+                                        <input type="text" class="form-control" placeholder="جار الحد الغربي">
+                                    </div>
+                                    
+                                    <!-- الحقل الرابع للحد الغربي - يظهر عند اختيار "لا يوجد" -->
+                                    <div id="fourthFieldWest" class="mb-3" style="display: none;">
+                                        <label class="form-label">نهاية الحد</label>
+                                        <input type="text" class="form-control" placeholder="نهاية الحد">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- الجدول للحد الغربي -->
+                                    <div class="card-table mb-4">
+                                        <label class="form-label">وصف الحد الغربي كما في الواقع ومحضر النزول</label>
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>الفئة</th>
+                                                    <th>تصنيف الفئة</th>
+                                                    <th>المساحة</th>
+                                                    <th>ملاحظات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" class="text-muted">لا توجد بيانات</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="add-row-btn mt-2">+ أضف سطر</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار الحفظ -->
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary me-2">حفظ البيانات</button>
+                    <button type="button" class="btn btn-success me-2" onclick="generateReport()">إنشاء تقرير PDF</button>
+                    <button type="button" class="btn btn-info me-2" onclick="sendReportToClient()">إرسال التقرير للعميل</button>
+                    <button type="button" class="btn btn-secondary">إلغاء</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal لإدخال بيانات العميل -->
+    <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="clientModalLabel">بيانات العميل</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="clientForm">
+                        <div class="mb-3">
+                            <label for="clientName" class="form-label">اسم العميل</label>
+                            <input type="text" class="form-control" id="clientName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="clientEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientPhone" class="form-label">رقم الهاتف</label>
+                            <input type="tel" class="form-control" id="clientPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="reportNotes" class="form-label">ملاحظات إضافية</label>
+                            <textarea class="form-control" id="reportNotes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="sendReport()">إرسال التقرير</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        // تفاعل القائمة المنسدلة المخصصة
+        const dropdownInput = document.getElementById('dropdownInput');
+        const dropdownList = document.getElementById('dropdownList');
+        dropdownInput.addEventListener('click', function() {
+            dropdownList.classList.toggle('show');
+        });
+        document.addEventListener('click', function(e) {
+            if (!dropdownInput.contains(e.target) && !dropdownList.contains(e.target)) {
+                dropdownList.classList.remove('show');
+            }
+        });
+        document.querySelectorAll('.custom-dropdown-item').forEach(item => {
+            item.addEventListener('click', function() {
+                dropdownInput.value = this.textContent;
+                dropdownList.classList.remove('show');
+            });
+        });
+        document.getElementById('addNew').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('سيتم فتح نافذة إنشاء عدل الروية جديد (تجريبي)');
+        });
+
+        const statementOptions = [
+            '1- لا يوجد',
+            '2- الاراضي',
+            '3- المعمورات',
+            '4- دور العبادة',
+            '5- المقابر',
+            '6- الاسواق',
+            '7- الطرقات',
+            '8- رهق\\مسقئ',
+            '9- اخرى تذكر',
+        ];
+        
+        // تعريف التصنيفات لكل بيان
+        const categoryMappings = {
+            '1- لا يوجد': ['لا يوجد تصنيف'],
+            '2- الاراضي': [
+                '1- زراعية',
+                '2- بيضاء', 
+                '3- صلب',
+                '4- متروكة',
+                '5- اخرى تذكر'
+            ],
+            '3- المعمورات': [
+                '1- سكني (مبنى - بيت - فلة - شقة - مسقفة)',
+                '2- سكني (عمارة)',
+                '3- تجاري (عمارة - مستشفى خاص - مشاريع خاصة)',
+                '4- مبنى حكومي',
+                '5- اخرى تذكر'
+            ],
+            '4- دور العبادة': [
+                '1- جامع تقام فيه صلاة الجمعة',
+                '2- مسجد صغير لا تقام فيه صلاة الجمعة',
+                '3- مصلى',
+                '4- مركز تحفيظ قران',
+                '5- كنائس - معابد',
+                '6- اخرى تذكر'
+            ],
+            '5- المقابر': [
+                '1- مقبرة عامة',
+                '2- مقبرة خاصة',
+                '3- مقبرة عائلية',
+                '4- اخرى تذكر'
+            ],
+            '6- الاسواق': [
+                '1- سوق مركزي',
+                '2- سوق محلي',
+                '3- مجمع تجاري',
+                '4- محلات تجارية',
+                '5- اخرى تذكر'
+            ],
+            '7- الطرقات': [
+                '1- شارع اسفلتي',
+                '2- شارع ترابي',
+                '3- طريق ترابي (غير مخطط)',
+                '4- مدخل مشترك',
+                '5- مذرة',
+                '6- ممر',
+                '7- اخرى تذكر'
+            ],
+            '8- رهق\\مسقئ': [
+                '1- رهق',
+                '2- عارضة',
+                '3- هاوية (نهاية الجبل)',
+                '4- سائلة عظمى',
+                '5- ساقية',
+                '6- غيل',
+                '7- اخرى تذكر'
+            ],
+            '9- اخرى تذكر': [
+                '1- اخرى تذكر',
+                '2- اخرى تذكر',
+                '3- اخرى تذكر'
+            ]
+        };
+
+        const categoryOptions = [
+            '1- زراعية',
+            '2- بيضاء',
+            '3- صلب',
+            '4- متروكة',
+            '5- مبنية',
+            '6- مسورة',
+            '7- اخرى تذكر...',
+            'إدخال يدوي...'
+        ];
+
+        // دالة لتحديث قائمة التصنيف حسب البيان المختار
+        function updateCategoryDropdown(statementInput, categoryInput) {
+            const selectedStatement = statementInput.value;
+            const categoryDropdown = categoryInput.closest('.dropdown').querySelector('.dropdown-menu');
+            
+            if (categoryMappings[selectedStatement]) {
+                const options = categoryMappings[selectedStatement];
+                categoryDropdown.innerHTML = options.map(opt => 
+                    `<li><a class='dropdown-item' href="#">${opt}</a></li>`
+                ).join('');
+                
+                // إضافة خيار الإدخال اليدوي إذا لم يكن موجوداً
+                if (!options.includes('إدخال يدوي...')) {
+                    categoryDropdown.innerHTML += '<li><a class="dropdown-item" href="#">إدخال يدوي...</a></li>';
+                }
+                
+                // مسح قيمة التصنيف الحالية
+                categoryInput.value = '';
+            }
+        }
+
+        // إضافة صف افتراضي عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', function() {
+            const tbody = document.querySelector('.card-table table tbody');
+            tbody.innerHTML = '';
+            const row = document.createElement('tr');
+            // الخلية الأولى: input مع قائمة منسدلة
+            const td1 = document.createElement('td');
+            td1.innerHTML = `
+              <div class=\"dropdown\">
+                <input type=\"text\" class=\"form-control statement-input\" readonly placeholder=\"اختر...\" value=\"نوع 1\" style=\"cursor:pointer; background:#fff;\" data-bs-toggle=\"dropdown\">
+                <ul class=\"dropdown-menu\">
+                  ${statementOptions.map(opt => `<li><a class='dropdown-item' href=\"#\">${opt}</a></li>`).join('')}
+                </ul>
+              </div>
+            `;
+            // الخلية الثانية: input مع قائمة منسدلة
+            const td2 = document.createElement('td');
+            td2.innerHTML = `
+              <div class=\"dropdown\">
+                <input type=\"text\" class=\"form-control category-input\" readonly placeholder=\"اختر...\" value=\"تصنيف افتراضي\" style=\"cursor:pointer; background:#fff;\" data-bs-toggle=\"dropdown\">
+                <ul class=\"dropdown-menu\">
+                  ${categoryOptions.map(opt => `<li><a class='dropdown-item' href=\"#\">${opt}</a></li>`).join('')}
+                </ul>
+              </div>
+            `;
+            // الخلية الثالثة: input عادي مع بيانات افتراضية
+            const td3 = document.createElement('td');
+            td3.innerHTML = '<input type="text" class="form-control" value="ملاحظة افتراضية" />';
+            // الخلية الرابعة: المساحة
+            const td4 = document.createElement('td');
+            td4.innerHTML = '<input type="text" class="form-control" placeholder="المساحة" />';
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
+            tbody.appendChild(row);
+        });
+
+        // إضافة سطر جديد للجدول عند الضغط على زر + أضف سطر
+        const addRowBtn = document.querySelector('.add-row-btn');
+        if (addRowBtn) {
+            addRowBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tbody = document.querySelector('.card-table table tbody');
+                // إذا كان الصف الوحيد هو "لا توجد بيانات"، احذفه أولاً
+                if (tbody.rows.length === 1 && tbody.rows[0].cells.length === 1) {
+                    tbody.innerHTML = '';
+                }
+                // أضف صف جديد
+                const row = document.createElement('tr');
+                // الخلية الأولى: input مع قائمة منسدلة
+                const td1 = document.createElement('td');
+                td1.innerHTML = `
+                  <div class=\"dropdown\">
+                    <input type=\"text\" class=\"form-control statement-input\" readonly placeholder=\"اختر...\" style=\"cursor:pointer; background:#fff;\" data-bs-toggle=\"dropdown\">
+                    <ul class=\"dropdown-menu\">
+                      ${statementOptions.map(opt => `<li><a class='dropdown-item' href=\"#\">${opt}</a></li>`).join('')}
+                    </ul>
+                  </div>
+                `;
+                // الخلية الثانية: input مع قائمة منسدلة
+                const td2 = document.createElement('td');
+                td2.innerHTML = `
+                  <div class=\"dropdown\">
+                    <input type=\"text\" class=\"form-control category-input\" readonly placeholder=\"اختر...\" style=\"cursor:pointer; background:#fff;\" data-bs-toggle=\"dropdown\">
+                    <ul class=\"dropdown-menu\">
+                      ${categoryOptions.map(opt => `<li><a class='dropdown-item' href=\"#\">${opt}</a></li>`).join('')}
+                    </ul>
+                  </div>
+                `;
+                // الخلية الثالثة: input عادي
+                const td3 = document.createElement('td');
+                td3.innerHTML = '<input type="text" class="form-control" />';
+                // الخلية الرابعة: المساحة
+                const td4 = document.createElement('td');
+                td4.innerHTML = '<input type="text" class="form-control" placeholder="المساحة" />';
+                row.appendChild(td1);
+                row.appendChild(td2);
+                row.appendChild(td3);
+                row.appendChild(td4);
+                tbody.appendChild(row);
+            });
+        }
+
+        // تفعيل أزرار "أضف سطر" لجميع الجداول
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-row-btn')) {
+                e.preventDefault();
+                const cardTable = e.target.closest('.card-table');
+                const tbody = cardTable.querySelector('table tbody');
+                
+                // إذا كان الصف الوحيد هو "لا توجد بيانات"، احذفه أولاً
+                if (tbody.rows.length === 1 && tbody.rows[0].cells.length === 1) {
+                    tbody.innerHTML = '';
+                }
+                
+                // أضف صف جديد
+                const row = document.createElement('tr');
+                // الخلية الأولى: input مع قائمة منسدلة
+                const td1 = document.createElement('td');
+                td1.innerHTML = `
+                  <div class=\"dropdown\">
+                    <input type=\"text\" class=\"form-control statement-input\" readonly placeholder=\"اختر...\" style=\"cursor:pointer; background:#fff;\" data-bs-toggle=\"dropdown\">
+                    <ul class=\"dropdown-menu\">
+                      ${statementOptions.map(opt => `<li><a class='dropdown-item' href=\"#\">${opt}</a></li>`).join('')}
+                    </ul>
+                  </div>
+                `;
+                // الخلية الثانية: input مع قائمة منسدلة
+                const td2 = document.createElement('td');
+                td2.innerHTML = `
+                  <div class=\"dropdown\">
+                    <input type=\"text\" class=\"form-control category-input\" readonly placeholder=\"اختر...\" style=\"cursor:pointer; background:#fff;\" data-bs-toggle=\"dropdown\">
+                    <ul class=\"dropdown-menu\">
+                      ${categoryOptions.map(opt => `<li><a class='dropdown-item' href=\"#\">${opt}</a></li>`).join('')}
+                    </ul>
+                  </div>
+                `;
+                // الخلية الثالثة: input عادي
+                const td3 = document.createElement('td');
+                td3.innerHTML = '<input type="text" class="form-control" />';
+                // الخلية الرابعة: المساحة
+                const td4 = document.createElement('td');
+                td4.innerHTML = '<input type="text" class="form-control" placeholder="المساحة" />';
+                row.appendChild(td1);
+                row.appendChild(td2);
+                row.appendChild(td3);
+                row.appendChild(td4);
+                tbody.appendChild(row);
+            }
+        });
+
+        // تفعيل اختيار القائمة المنسدلة للبيان والتصنيف بعد إضافة الصف
+        document.addEventListener('click', function(e) {
+            // البيان
+            if (e.target.classList.contains('dropdown-item') && e.target.closest('.dropdown').querySelector('.statement-input')) {
+                e.preventDefault();
+                const input = e.target.closest('.dropdown').querySelector('.statement-input');
+                const row = input.closest('tr');
+                const categoryInput = row.querySelector('.category-input');
+                
+                if (e.target.textContent === 'إدخال يدوي...' || e.target.textContent === '9- اخرى تذكر') {
+                    input.value = '';
+                    input.readOnly = false;
+                    input.focus();
+                } else {
+                    input.value = e.target.textContent;
+                    input.readOnly = true;
+                    
+                    // تحديث قائمة التصنيف حسب البيان المختار
+                    updateCategoryDropdown(input, categoryInput);
+                }
+            }
+            // التصنيف
+            if (e.target.classList.contains('dropdown-item') && e.target.closest('.dropdown').querySelector('.category-input')) {
+                e.preventDefault();
+                const input = e.target.closest('.dropdown').querySelector('.category-input');
+                if (e.target.textContent === 'إدخال يدوي...' || e.target.textContent === '7- اخرى تذكر') {
+                    input.value = '';
+                    input.readOnly = false;
+                    input.focus();
+                } else {
+                    input.value = e.target.textContent;
+                    input.readOnly = true;
+                }
+            }
+        });
+
+        // القائمة المنسدلة لحقل عدول
+        const dropdownInputAdoul = document.getElementById('dropdownInputAdoul');
+        const dropdownListAdoul = document.getElementById('dropdownListAdoul');
+        dropdownInputAdoul.addEventListener('click', function() {
+            dropdownListAdoul.classList.toggle('show');
+        });
+        document.addEventListener('click', function(e) {
+            if (!dropdownInputAdoul.contains(e.target) && !dropdownListAdoul.contains(e.target)) {
+                dropdownListAdoul.classList.remove('show');
+            }
+        });
+        document.querySelectorAll('#dropdownListAdoul .custom-dropdown-item').forEach(item => {
+            item.addEventListener('click', function() {
+                dropdownInputAdoul.value = this.textContent;
+                dropdownListAdoul.classList.remove('show');
+            });
+        });
+        document.getElementById('addNewAdoul').addEventListener('click', function(e) {
+            e.preventDefault();
+            var adoulModal = new bootstrap.Modal(document.getElementById('adoulModal'));
+            adoulModal.show();
+        });
+
+        // تفعيل القائمة المنسدلة لنوع الفاصل للحد الجنوبي
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('dropdown-item') && e.target.closest('.dropdown').querySelector('#southBoundaryType')) {
+                e.preventDefault();
+                const input = e.target.closest('.dropdown').querySelector('#southBoundaryType');
+                const selectedValue = e.target.getAttribute('data-value');
+                const fourthField = document.getElementById('fourthFieldSouth');
+                
+                input.value = e.target.textContent;
+                
+                // إظهار/إخفاء الحقل الرابع
+                if (selectedValue === 'لا يوجد') {
+                    fourthField.style.display = 'block';
+                } else {
+                    fourthField.style.display = 'none';
+                }
+                
+                // إذا كان الاختيار "اخرى تذكر"، اجعل الحقل قابل للتحرير
+                if (selectedValue === 'اخرى تذكر') {
+                    input.value = '';
+                    input.readOnly = false;
+                    input.focus();
+                } else {
+                    input.readOnly = true;
+                }
+            }
+        });
+
+        // تفعيل القائمة المنسدلة لنوع الفاصل للحد الشمالي
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('dropdown-item') && e.target.closest('.dropdown').querySelector('#northBoundaryType')) {
+                e.preventDefault();
+                const input = e.target.closest('.dropdown').querySelector('#northBoundaryType');
+                const selectedValue = e.target.getAttribute('data-value');
+                const fourthField = document.getElementById('fourthFieldNorth');
+                
+                input.value = e.target.textContent;
+                
+                // إظهار/إخفاء الحقل الرابع
+                if (selectedValue === 'لا يوجد') {
+                    fourthField.style.display = 'block';
+                } else {
+                    fourthField.style.display = 'none';
+                }
+                
+                // إذا كان الاختيار "اخرى تذكر"، اجعل الحقل قابل للتحرير
+                if (selectedValue === 'اخرى تذكر') {
+                    input.value = '';
+                    input.readOnly = false;
+                    input.focus();
+                } else {
+                    input.readOnly = true;
+                }
+            }
+        });
+
+        // تفعيل القائمة المنسدلة لنوع الفاصل للحد الشرقي
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('dropdown-item') && e.target.closest('.dropdown').querySelector('#eastBoundaryType')) {
+                e.preventDefault();
+                const input = e.target.closest('.dropdown').querySelector('#eastBoundaryType');
+                const selectedValue = e.target.getAttribute('data-value');
+                const fourthField = document.getElementById('fourthFieldEast');
+                
+                input.value = e.target.textContent;
+                
+                // إظهار/إخفاء الحقل الرابع
+                if (selectedValue === 'لا يوجد') {
+                    fourthField.style.display = 'block';
+                } else {
+                    fourthField.style.display = 'none';
+                }
+                
+                // إذا كان الاختيار "اخرى تذكر"، اجعل الحقل قابل للتحرير
+                if (selectedValue === 'اخرى تذكر') {
+                    input.value = '';
+                    input.readOnly = false;
+                    input.focus();
+                } else {
+                    input.readOnly = true;
+                }
+            }
+        });
+
+        // تفعيل القائمة المنسدلة لنوع الفاصل للحد الغربي
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('dropdown-item') && e.target.closest('.dropdown').querySelector('#westBoundaryType')) {
+                e.preventDefault();
+                const input = e.target.closest('.dropdown').querySelector('#westBoundaryType');
+                const selectedValue = e.target.getAttribute('data-value');
+                const fourthField = document.getElementById('fourthFieldWest');
+                
+                input.value = e.target.textContent;
+                
+                // إظهار/إخفاء الحقل الرابع
+                if (selectedValue === 'لا يوجد') {
+                    fourthField.style.display = 'block';
+                } else {
+                    fourthField.style.display = 'none';
+                }
+                
+                // إذا كان الاختيار "اخرى تذكر"، اجعل الحقل قابل للتحرير
+                if (selectedValue === 'اخرى تذكر') {
+                    input.value = '';
+                    input.readOnly = false;
+                    input.focus();
+                } else {
+                    input.readOnly = true;
+                }
+            }
+        });
+
+        // دالة إنشاء تقرير PDF
+        function generateReport() {
+            // جمع البيانات من النموذج
+            const formData = collectFormData();
+            
+            // إنشاء PDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // إعداد الخط العربي
+            doc.setFont("Arial");
+            
+            // عنوان التقرير
+            doc.setFontSize(20);
+            doc.text("تقرير انجاز", 105, 20, { align: "center" });
+            
+            // معلومات الطلب
+            doc.setFontSize(12);
+            doc.text("معلومات الطلب:", 20, 40);
+            doc.setFontSize(10);
+            doc.text(`رقم التقديم: ${formData.submissionNumber}`, 20, 50);
+            doc.text(`نوع الطلب: ${formData.requestType}`, 20, 60);
+            doc.text(`رقم التكليف: ${formData.assignmentNumber}`, 20, 70);
+            
+            // بيانات الحدود
+            doc.setFontSize(12);
+            doc.text("بيانات الحدود:", 20, 90);
+            doc.setFontSize(10);
+            doc.text(`الحد الشمالي: ${formData.northBoundary}`, 20, 100);
+            doc.text(`الحد الجنوبي: ${formData.southBoundary}`, 20, 110);
+            
+            // تاريخ التقرير
+            const today = new Date().toLocaleDateString('ar-SA');
+            doc.text(`تاريخ التقرير: ${today}`, 20, 130);
+            
+            // حفظ الملف
+            doc.save(`تقرير_انجاز_${formData.submissionNumber}.pdf`);
+        }
+        
+        // دالة إرسال التقرير للعميل
+        function sendReportToClient() {
+            // عرض modal لإدخال بيانات العميل
+            const modal = new bootstrap.Modal(document.getElementById('clientModal'));
+            modal.show();
+        }
+        
+        // دالة إرسال التقرير
+        function sendReport() {
+            const clientName = document.getElementById('clientName').value;
+            const clientEmail = document.getElementById('clientEmail').value;
+            const clientPhone = document.getElementById('clientPhone').value;
+            const reportNotes = document.getElementById('reportNotes').value;
+            
+            if (!clientName || !clientEmail) {
+                alert('يرجى إدخال اسم العميل والبريد الإلكتروني');
+                return;
+            }
+            
+            // جمع البيانات
+            const formData = collectFormData();
+            
+            // إنشاء التقرير
+            generateReport();
+            
+            // إرسال التقرير (يمكن استخدام EmailJS أو خدمة بريد إلكتروني)
+            sendEmailReport(clientName, clientEmail, formData, reportNotes);
+            
+            // إغلاق Modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('clientModal'));
+            modal.hide();
+            
+            alert('تم إرسال التقرير بنجاح!');
+        }
+        
+        // دالة جمع البيانات من النموذج
+        function collectFormData() {
+            return {
+                submissionNumber: document.querySelector('input[value="9990020503"]')?.value || '',
+                requestType: document.querySelector('select option:checked')?.text || '',
+                assignmentNumber: document.querySelector('input[placeholder*="رقم التكليف"]')?.value || '',
+                northBoundary: document.querySelector('input[placeholder*="الحد الشمالي"]')?.value || '',
+                southBoundary: document.querySelector('input[placeholder*="الحد الجنوبي"]')?.value || '',
+                // يمكن إضافة المزيد من الحقول حسب الحاجة
+            };
+        }
+        
+        // دالة إرسال البريد الإلكتروني (مثال باستخدام EmailJS)
+        function sendEmailReport(clientName, clientEmail, formData, notes) {
+            // يمكن استخدام EmailJS أو أي خدمة بريد إلكتروني أخرى
+            // مثال باستخدام EmailJS:
+            /*
+            emailjs.send("service_id", "template_id", {
+                to_name: clientName,
+                to_email: clientEmail,
+                report_data: JSON.stringify(formData),
+                notes: notes
+            });
+            */
+            
+            console.log('إرسال التقرير إلى:', clientEmail);
+            console.log('بيانات العميل:', { clientName, clientEmail, clientPhone: document.getElementById('clientPhone').value });
+            console.log('بيانات التقرير:', formData);
+        }
+    </script>
+</body>
+</html> 

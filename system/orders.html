@@ -1009,9 +1009,8 @@ levels</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span><
                     <td>عام</td>
                     <td>.pdf</td>
                     <td>علي بن علي</td>
-                    <td><a href="#!"><i class="icon feather icon-edit f-w-600 f-16 m-r-15 text-success"></i></a
-                        ><a href="#!"><i class="feather icon-trash-2 f-w-600 f-16 text-danger"></i></a
-                      ></td>
+                    <td><a href="#" class="view-contract"><i class="feather icon-eye f-w-600 f-16 m-r-15 text-primary"> عرض المزيد</i></a>
+                       </td>
                   
                   </tr>
                   <tr>
@@ -1027,9 +1026,8 @@ levels</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span><
                     <td>مخصص</td>
                     <td>.pdf</td>
                     <td>احمد محمد</td>
-                    <td><a href="#!"><i class="icon feather icon-edit f-w-600 f-16 m-r-15 text-success"></i></a
-                        ><a href="#!"><i class="feather icon-trash-2 f-w-600 f-16 text-danger"></i></a
-                      ></td>
+                    <td><a href="#" class="view-contract"><i class="feather icon-eye f-w-600 f-16 m-r-15 text-primary"></i></a>
+                      عرض المزيد</td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -1044,9 +1042,8 @@ levels</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span><
                     <td>عام</td>
                     <td>.pdf</td>
                     <td>النهاري</td>
-                    <td><a href="#!"><i class="icon feather icon-edit f-w-600 f-16 m-r-15 text-success"></i></a
-                        ><a href="#!"><i class="feather icon-trash-2 f-w-600 f-16 text-danger"></i></a
-                      ></td>
+                    <td><a href="#" class="view-contract"><i class="feather icon-eye f-w-600 f-16 m-r-15 text-primary"></i></a>
+                      عرض المزيد</td>
                   </tr>
                 </tbody>
                 
@@ -1198,7 +1195,7 @@ levels</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span><
 <div class="footer-wrapper container-fluid">
 <div class="row">
 <div class="col my-1 footer-link">
-<p class="m-0">Copyright &copy; <a href="#">Eng.Mohammed Abubakr</a></p>
+<p class="m-0">Copyright &copy; <a href="#"> </a></p>
 </div>
 <div class="col-auto my-1">
 <ul class="list-inline footer-link mb-0">
@@ -1293,3 +1290,29 @@ levels</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span><
     </div>
   </div>
 </div>
+
+<!-- Modal for View Contract -->
+<div class="modal fade" id="viewContractModal" tabindex="-1" role="dialog" aria-labelledby="viewContractModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewContractModalLabel">عرض تفاصيل العقد</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <iframe src="contract-template.html" style="width: 100%; height: 80vh; border: none;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.view-contract').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        var modal = new bootstrap.Modal(document.getElementById('viewContractModal'));
+        modal.show();
+      });
+    });
+  });
+</script>

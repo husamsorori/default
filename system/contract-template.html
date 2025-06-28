@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة العقود للمهندس</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body { font-family: 'Roboto', 'Cairo', sans-serif; background: #f8f9fa; }
+        .contracts-list { max-width: 1200px; margin: 40px auto; display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+        .contract-card { width: 420px; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #0002; padding: 32px 28px 24px 28px; margin-bottom: 0; position: relative; display: flex; flex-direction: column; }
+        .contract-header { text-align: center; font-size: 1.3rem; font-weight: bold; color: #2c3e50; margin-bottom: 18px; }
+        .contract-section { margin-bottom: 14px; }
+        .contract-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .contract-table th, .contract-table td { border: 1px solid #dee2e6; padding: 6px 8px; text-align: right; font-size: 14px; }
+        .contract-table th { background: #f1f3f4; }
+        .signatures { display: flex; justify-content: space-between; margin-top: 24px; }
+        .signature-block { text-align: center; width: 40%; }
+        .footer { text-align: center; color: #888; margin-top: 18px; font-size: 13px; }
+        .contract-actions { display: flex; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+        .btn-approve, .btn-reject { border: none; border-radius: 6px; padding: 6px 16px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-weight: 500; min-width: 80px; text-align: center; }
+        .btn-approve { background: #27ae60; color: #fff; }
+        .btn-approve:hover { background: #219150; transform: translateY(-1px); box-shadow: 0 2px 4px rgba(39, 174, 96, 0.3); }
+        .btn-reject { background: #e74c3c; color: #fff; }
+        .btn-reject:hover { background: #c0392b; transform: translateY(-1px); box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3); }
+        
+        /* Inline Form Styles */
+        .reject-form { display: none; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin-top: 15px; }
+        .reject-form h4 { margin-top: 0; color: #2c3e50; text-align: center; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #2c3e50; }
+        .form-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; resize: vertical; min-height: 80px; }
+        .form-buttons { text-align: center; margin-top: 15px; }
+        .form-buttons button { margin: 0 5px; padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-cancel { background: #95a5a6; color: white; }
+        .btn-submit { background: #e74c3c; color: white; }
+        .btn-cancel:hover { background: #7f8c8d; }
+        .btn-submit:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+    <div class="contracts-list">
+        <!-- عقد 1 -->
+        <div class="contract-card">
+            <div class="contract-header">عقد عمل</div>
+            <div class="contract-section">
+                <strong>تاريخ العقد:</strong> <span>2024-06-07</span> &nbsp; <strong>الوقت:</strong> <span>10:30 صباحًا</span>
+            </div>
+            <div class="contract-section">
+                <strong>الطلب:</strong> <span>تنفيذ أرض بدون رهق</span>
+            </div>
+            <div class="contract-section">
+                <strong>الطرف الأول:</strong> <span>أحمد علي</span> &nbsp; <strong>الطرف الثاني:</strong> <span>شركة البناء الحديثة</span>
+            </div>
+            <div class="contract-section">
+                <strong>القرية:</strong> <span>الروضة</span> &nbsp; <strong>العزلة:</strong> <span>بني الحارث</span> &nbsp; <strong>المحافظة:</strong> <span>صنعاء</span>
+            </div>
+            <div class="contract-section">
+                <strong>نوع الوثيقة:</strong> <span>عقد بيع</span> &nbsp; <strong>نوع القسم:</strong> <span>سكني</span>
+            </div>
+            <div class="contract-section">
+                <strong>المساحة كما في الوثيقة:</strong> <span>9 لبن</span> &nbsp; <strong>الحزة:</strong> <span>الحزة الشرقية</span>
+            </div>
+            <div class="contract-section">
+                <h4>حدود الأرض</h4>
+                <table class="contract-table">
+                    <thead>
+                        <tr>
+                            <th>م</th>
+                            <th>نوع الحد</th>
+                            <th>غير مطابق للواقع</th>
+                            <th>الحد كما في الوثيقة</th>
+                            <th>فرق</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>شمال</td><td>لا</td><td>شارع 10م</td><td>0م</td></tr>
+                        <tr><td>2</td><td>جنوب</td><td>نعم</td><td>أرض فاضية</td><td>2م</td></tr>
+                        <tr><td>3</td><td>شرق</td><td>لا</td><td>منزل</td><td>0م</td></tr>
+                        <tr><td>4</td><td>غرب</td><td>لا</td><td>أرض زراعية</td><td>0م</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="contract-section">
+                <strong>تكلفة العمل:</strong> <span>70,000 ريال يمني</span> &nbsp; <strong>التكلفة الكلية:</strong> <span>70,000 ريال يمني</span>
+            </div>
+            <div class="contract-section">
+                <strong>تكلفة النقل:</strong> <span>5,000 ريال يمني</span> &nbsp; <strong>تكلفة إضافية:</strong> <span>2,000 ريال يمني</span>
+            </div>
+            <div class="contract-section">
+                <h4>بنود العقد</h4>
+                <ol>
+                    <li>يلتزم الطرف الثاني بتنفيذ العمل وفقًا للمواصفات أعلاه خلال المدة المحددة.</li>
+                    <li>غرامات التأخر عن تسليم العمل عن المدة المتفق عليها (%)</li>
+                     <li>نسبة الدفع مقدماً (%)</li>
+                    <li>في حال الاعتذار عن العمل بعد استلام الدفعة المقدمة (%)</li>
+                    <li>نسبة الدفع عند النزول (%)</li>
+                    <li>في حال اعتذار الجمل عن العمل بعد استلام الدفعة المقدمة (%)</li>
+                    <li>نسبة الدفع بعد تسليم العمل (%)</li>
+                </ol>
+            </div>
+            <!--  
+           <div class="signatures">
+                <div class="signature-block">
+                    <strong>توقيع الطرف الأول</strong>
+                    <div style="height:50px; border-bottom:1px solid #aaa; margin:12px 0;"></div>
+                    <span>أحمد علي</span>
+                </div>
+                <div class="signature-block">
+                    <strong>توقيع الطرف الثاني</strong>
+                    <div style="height:50px; border-bottom:1px solid #aaa; margin:12px 0;"></div>
+                    <span>محمد صالح حسين</span>
+                </div>
+            </div> -->
+            <div class="contract-actions" id="contractActions">
+                <button class="btn-approve">الموافقة على العقد</button>
+                <button class="btn-reject">الاعتراض على احد البنود</button>
+                <button class="btn-reject">اضافة او تعديل بند</button>
+                <button class="btn-reject" id="rejectBtn" onclick="showRejectForm()">رفض العقد</button>
+            </div>
+            
+            <!-- Inline Form for Rejection Reason (hidden by default) -->
+            <div id="rejectFormContainer" style="display:none;">
+                <form id="rejectForm" class="reject-form" style="display:block; margin-top:0;">
+                    <div class="form-group">
+                        <label>اختر سبب الرفض:</label>
+                        <select id="reason" name="reason">
+                            <option value="">اختر سبب الرفض</option>
+                            <option value="ضغط عمل">ضغط عمل</option>
+                            <option value="ظرف طارئ">ظرف طارئ</option>
+                            <option value="بعد مسافة">بعد مسافة</option>
+                            <option value="بعد مسافة">عدم الوصول الى اتفاق </option>
+                            <option value="بعد مسافة">الاختلاف على المبلغ </option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+           
+                    <div class="form-buttons">
+                        <button type="button" class="btn-cancel" onclick="hideRejectForm()">إلغاء</button>
+                        <button type="submit" class="btn-submit">إرسال</button>
+                    </div>
+                </form>
+            </div>
+         
+        </div>
+        
+        <!-- عقد 2 
+         
+        
+        
+        
+        
+        
+        -->
+       
+    </div>
+    
+    <script>
+        // Show the reject form and hide the action buttons
+        function showRejectForm() {
+            document.getElementById('contractActions').style.display = 'none';
+            document.getElementById('rejectFormContainer').style.display = 'block';
+        }
+        // Hide the reject form and show the action buttons
+        function hideRejectForm() {
+            document.getElementById('contractActions').style.display = 'flex';
+            document.getElementById('rejectFormContainer').style.display = 'none';
+            document.getElementById('rejectForm').reset();
+        }
+        // Handle form submission
+        document.getElementById('rejectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var selectedReason = document.getElementById('reason').value;
+            var details = document.getElementById('details').value;
+            if (selectedReason === "") {
+                alert('الرجاء اختيار سبب الرفض');
+                return;
+            }
+            // Here you can add the logic to send the data to server
+            console.log('سبب الرفض:', selectedReason);
+            console.log('التفاصيل:', details);
+            alert('تم إرسال سبب الرفض بنجاح');
+            hideRejectForm();
+        });
+    </script>
+</body>
+</html> 
