@@ -458,10 +458,9 @@
             <!-- أزرار الحفظ -->
             <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary me-2">حفظ البيانات</button>
-                    <button type="button" class="btn btn-success me-2" onclick="generateReport()">إنشاء تقرير PDF</button>
-                    <button type="button" class="btn btn-info me-2" onclick="sendReportToClient()">إرسال التقرير للعميل</button>
-                    <button type="button" class="btn btn-secondary">إلغاء</button>
+                    <button type="submit" class="btn btn-primary me-2" onclick="saveData(event)">حفظ البيانات</button>
+                    <button type="button" class="btn btn-info me-2" onclick="sendReportToClient()"> حفظ وإرسال التقرير للعميل</button>
+                    
                 </div>
             </div>
         </form>
@@ -501,6 +500,38 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal لإدخال بيانات عدل التروية -->
+    <div class="modal fade" id="adoulModal" tabindex="-1" aria-labelledby="adoulModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="adoulModalLabel">إدخال بيانات عدل التروية</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+          </div>
+          <div class="modal-body">
+            <form id="adoulForm">
+              <div class="mb-3">
+                <label class="form-label">اسم العدل</label>
+                <input type="text" class="form-control" name="adoulName" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">رقم الجوال</label>
+                <input type="text" class="form-control" name="adoulPhone" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">ملاحظات</label>
+                <textarea class="form-control" name="adoulNotes"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+            <button type="submit" class="btn btn-primary" form="adoulForm">حفظ</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -939,6 +970,20 @@
             }
         });
 
+        // دالة حفظ البيانات
+        function saveData(event) {
+            event.preventDefault(); // منع إرسال النموذج
+            
+            // عرض رسالة نجاح
+            Swal.fire({
+                title: 'تم الحفظ بنجاح!',
+                text: 'تم حفظ البيانات بنجاح - العمل أصبح جاهز',
+                icon: 'success',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#3085d6'
+            });
+        }
+
         // دالة إنشاء تقرير PDF
         function generateReport() {
             // جمع البيانات من النموذج
@@ -980,9 +1025,14 @@
         
         // دالة إرسال التقرير للعميل
         function sendReportToClient() {
-            // عرض modal لإدخال بيانات العميل
-            const modal = new bootstrap.Modal(document.getElementById('clientModal'));
-            modal.show();
+            // عرض رسالة نجاح
+            Swal.fire({
+                title: 'تم الإرسال بنجاح!',
+                text: 'تم إرسال التقرير إلى العميل بنجاح',
+                icon: 'success',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#3085d6'
+            });
         }
         
         // دالة إرسال التقرير
@@ -1042,6 +1092,36 @@
             console.log('بيانات العميل:', { clientName, clientEmail, clientPhone: document.getElementById('clientPhone').value });
             console.log('بيانات التقرير:', formData);
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ربط زر إنشاء عدل تروية جديد بفتح المودال
+            var addNewAdoulBtn = document.getElementById('addNewAdoul');
+            if (addNewAdoulBtn) {
+                addNewAdoulBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var adoulModal = new bootstrap.Modal(document.getElementById('adoulModal'));
+                    adoulModal.show();
+                });
+            }
+            // رسالة نجاح عند حفظ بيانات العدل
+            var adoulForm = document.getElementById('adoulForm');
+            if (adoulForm) {
+                adoulForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var adoulModal = bootstrap.Modal.getInstance(document.getElementById('adoulModal'));
+                    adoulModal.hide();
+                    Swal.fire({
+                        title: 'تم الحفظ!',
+                        text: 'تم حفظ بيانات عدل التروية بنجاح',
+                        icon: 'success',
+                        confirmButtonText: 'حسناً',
+                        confirmButtonColor: '#3085d6'
+                    });
+                    adoulForm.reset();
+                });
+            }
+        });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html> 

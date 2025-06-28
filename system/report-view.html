@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض التقرير المحفوظ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Tajawal', Arial, sans-serif;
+        }
+        .main-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+        .report-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .report-header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .report-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 25px 0 15px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 200px;
+        }
+        .info-value {
+            color: #34495e;
+            text-align: left;
+        }
+        .boundary-section {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .boundary-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .table-responsive {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table th {
+            background: #3498db;
+            color: white;
+            font-weight: 500;
+        }
+        .status-badge {
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .print-btn {
+            background: #3498db;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .print-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .back-btn {
+            background: #95a5a6;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 767px) {
+            .main-card { padding: 15px; }
+            .info-row { flex-direction: column; align-items: flex-start; }
+            .info-label { min-width: auto; margin-bottom: 5px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-card">
+        <!-- رأس التقرير -->
+        <div class="report-header">
+            <h1>تقرير إنجاز العمل</h1>
+            <p>تم تسليم العمل بنجاح - رقم التقديم: 9990020503</p>
+            <span class="status-badge">تم التسليم</span>
+        </div>
+
+        <!-- معلومات الطلب الأساسية -->
+        <div class="section-title">معلومات الطلب</div>
+        <div class="info-card">
+            <div class="info-row">
+                <span class="info-label">رقم التقديم:</span>
+                <span class="info-value">9990020503</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">نوع الطلب:</span>
+                <span class="info-value">طلب جديد</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">الرقم المزيد لموضوع الكلي/الشامل:</span>
+                <span class="info-value">123456789</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">رقم التكليف:</span>
+                <span class="info-value">TC-2024-001</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">وكلاء أوقاف في القرى:</span>
+                <span class="info-value">عادل محمد صالح عايش-77088864</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">عدول التروية:</span>
+                <span class="info-value">وكلاء أوقاف في القرى = عادل محمد صالح عايش-77088864</span>
+            </div>
+        </div>
+
+        <!-- الوضع القائم -->
+        <div class="section-title">الوضع القائم للموضع الكلي/الشامل</div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>الفئة</th>
+                        <th>تصنيف الفئة</th>
+                        <th>ملاحظات</th>
+                        <th>المساحة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>نوع 1</td>
+                        <td>تصنيف افتراضي</td>
+                        <td>ملاحظة افتراضية</td>
+                        <td>100 متر مربع</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- بيانات الحدود -->
+        <div class="section-title">بيانات الحدود</div>
+        
+        <!-- الحد الشمالي -->
+        <div class="boundary-section">
+            <div class="boundary-title">الحد الشمالي</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-row">
+                        <span class="info-label">الحد الشمالي:</span>
+                        <span class="info-value">شارع الملك فهد</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">نوع الفاصل:</span>
+                        <span class="info-value">سور</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">جار الحد الشمالي:</span>
+                        <span class="info-value">عبدالله محمد</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>الفئة</th>
+                                    <th>تصنيف الفئة</th>
+                                    <th>المساحة</th>
+                                    <th>ملاحظات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>الأراضي</td>
+                                    <td>زراعية</td>
+                                    <td>50 متر مربع</td>
+                                    <td>أرض خصبة</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الحد الجنوبي -->
+        <div class="boundary-section">
+            <div class="boundary-title">الحد الجنوبي</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-row">
+                        <span class="info-label">الحد الجنوبي:</span>
+                        <span class="info-value">شارع الأمير سلطان</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">نوع الفاصل:</span>
+                        <span class="info-value">عريم</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">جار الحد الجنوبي:</span>
+                        <span class="info-value">محمد أحمد</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>الفئة</th>
+                                    <th>تصنيف الفئة</th>
+                                    <th>المساحة</th>
+                                    <th>ملاحظات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>المعمورات</td>
+                                    <td>سكني</td>
+                                    <td>75 متر مربع</td>
+                                    <td>منزل سكني</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الحد الشرقي -->
+        <div class="boundary-section">
+            <div class="boundary-title">الحد الشرقي</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-row">
+                        <span class="info-label">الحد الشرقي:</span>
+                        <span class="info-value">شارع الملك عبدالله</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">نوع الفاصل:</span>
+                        <span class="info-value">جدار</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">جار الحد الشرقي:</span>
+                        <span class="info-value">أحمد علي</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>الفئة</th>
+                                    <th>تصنيف الفئة</th>
+                                    <th>المساحة</th>
+                                    <th>ملاحظات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>الطرقات</td>
+                                    <td>شارع أسفلتي</td>
+                                    <td>25 متر مربع</td>
+                                    <td>طريق رئيسي</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الحد الغربي -->
+        <div class="boundary-section">
+            <div class="boundary-title">الحد الغربي</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-row">
+                        <span class="info-label">الحد الغربي:</span>
+                        <span class="info-value">شارع الملك خالد</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">نوع الفاصل:</span>
+                        <span class="info-value">الل</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">جار الحد الغربي:</span>
+                        <span class="info-value">علي حسن</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>الفئة</th>
+                                    <th>تصنيف الفئة</th>
+                                    <th>المساحة</th>
+                                    <th>ملاحظات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>دور العبادة</td>
+                                    <td>مسجد</td>
+                                    <td>30 متر مربع</td>
+                                    <td>مسجد صغير</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- معلومات إضافية -->
+        <div class="section-title">معلومات إضافية</div>
+        <div class="info-card">
+            <div class="info-row">
+                <span class="info-label">تاريخ التسليم:</span>
+                <span class="info-value" id="deliveryDate"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">حالة العمل:</span>
+                <span class="info-value"><span class="status-badge">مكتمل</span></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">ملاحظات:</span>
+                <span class="info-value">تم إنجاز جميع الأعمال المطلوبة بنجاح</span>
+            </div>
+        </div>
+
+        <!-- أزرار التحكم -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <button type="button" class="btn print-btn me-2" onclick="printReport()">
+                    <i class="ti ti-printer"></i> طباعة التقرير
+                </button>
+                <button type="button" class="btn back-btn" onclick="goBack()">
+                    <i class="ti ti-arrow-left"></i> رجوع
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // عرض تاريخ التسليم الحالي
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toLocaleDateString('ar-SA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('deliveryDate').textContent = today;
+        });
+
+        // دالة طباعة التقرير
+        function printReport() {
+            window.print();
+        }
+
+        // دالة عودة للصفحة السابقة
+        function goBack() {
+            // العودة إلى الصفحة الرئيسية مع عرض الجدول
+            window.location.href = 'index.html#reports';
+        }
+    </script>
+</body>
+</html> 
